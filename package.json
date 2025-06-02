@@ -1,8 +1,8 @@
 {
-  "name": "tubesite",
+  "name": "tubesitekjr",
   "version": "1.0.0",
   "private": true,
-  "description": "Fully featured adult video tubesite frontend",
+  "description": "Fully featured tubesite frontend",
   "scripts": {
     "dev": "react-scripts start",
     "start": "react-scripts start",
@@ -15,7 +15,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "tailwind": "^4.0.0"
   },
   "browserslist": {
     "production": [
