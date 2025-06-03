@@ -7,7 +7,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { getAnalytics, logEvent } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBBKEtKhQxLHqW2_0EdsEVTuLt7Lv4CfUw",
@@ -15,8 +14,7 @@ const firebaseConfig = {
   projectId: "tubesitekjr",
   storageBucket: "tubesitekjr.appspot.com",
   messagingSenderId: "473479812718",
-  appId: "1:473479812718:web:c624f35de40266c3e4f87f",
-  measurementId: "G-2C4MC1HN74"
+  appId: "1:473479812718:web:c624f35de40266c3e4f87f"
 };
 
 const ADMIN_UID = "kyleforotherstuff123@gmail.com";
@@ -25,7 +23,6 @@ const App = () => {
   const [db, setDb] = useState(null);
   const [auth, setAuth] = useState(null);
   const [storage, setStorage] = useState(null);
-  const [analytics, setAnalytics] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -47,19 +44,14 @@ const App = () => {
     const firestore = getFirestore(app);
     const firebaseAuth = getAuth(app);
     const firebaseStorage = getStorage(app);
-    const firebaseAnalytics = getAnalytics(app);
 
     setDb(firestore);
     setAuth(firebaseAuth);
     setStorage(firebaseStorage);
-    setAnalytics(firebaseAnalytics);
-
-    logEvent(firebaseAnalytics, 'site_visited');
 
     const unsubscribe = onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
         setUserId(user.uid);
-        logEvent(firebaseAnalytics, 'login', { method: 'anonymous' });
       } else {
         try {
           await signInAnonymously(firebaseAuth);
